@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'golden.apps.GoldenConfig',
+    'bootstrap3',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
