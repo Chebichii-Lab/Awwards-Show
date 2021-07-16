@@ -8,7 +8,7 @@ class Profile(models.Model):
     profile_picture = CloudinaryField('image')
     profile_bio = models.TextField()
     profile_contact = models.CharField(max_length=60,blank=True)
-
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile",primary_key=True)
 
 class Project(models.Model):
     project_title = models.CharField(max_length=60,blank=True)
