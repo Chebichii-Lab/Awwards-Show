@@ -4,7 +4,7 @@ cloudinary==1.26.0
 config==0.5.0.post0
 confusable-homoglyphs==3.2.0
 dj-database-url==0.5.0
-Django==3.2.5
+Django==1.11.17
 django-bootstrap3==15.0.0
 django-cors-headers==3.7.0
 django-heroku==0.3.1
