@@ -1,4 +1,4 @@
-from golden.models import Profile
+from golden.models import Profile, Project
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -15,3 +15,8 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['user', 'profile_picture', 'profile_bio']
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        exclude = ['user','profile']

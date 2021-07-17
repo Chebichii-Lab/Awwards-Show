@@ -1,14 +1,16 @@
-from golden.forms import SignupForm, UserProfileForm
+from golden.models import Project
+from golden.forms import ProjectForm, SignupForm, UserProfileForm
 from django.shortcuts import render
 from django.contrib.auth import login, authenticate
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+
 @login_required(login_url='/accounts/login/')
 def index(request):
-
-    return render(request,'index.html')
+    projects = Project.objects.all()
+    return render(request,'index.html', {'projects':projects})
 
 def signup(request):
     if request.method == 'POST':
@@ -35,5 +37,20 @@ def profile(request):
         profile_form = UserProfileForm(instance=request.user)
         # user_form = UserUpdateForm(instance=request.user)
     return render(request, 'profile.html',{ "profile_form": profile_form})
+
+@login_required(login_url='/accounts/login')
+def project(request):
+	current_user = request.user
+	if request.method == 'POST':
+		form = ProjectForm(request.POST,request.FILES)
+		if form.is_valid():
+			new_project = form.save(commit=False)
+			new_project.user = current_user
+			new_project.save()
+			return redirect('index')
+	else:
+			form = ProjectForm()
+	return render(request, 'project.html',{"form":form})
+
 
 
