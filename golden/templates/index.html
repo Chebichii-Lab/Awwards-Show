@@ -22,7 +22,8 @@
                                         <img class="card-img-top mb-10 img-responsive i-images"
                                             src="{{project.project_image.url}}" style="height:270px;width:300px;">
                                         <div class="overlay">
-                                            <div class="text">{{project.title}}</div>
+                                            <div class="text" style="font-size:15px;">{{project.project_title}}</div>
+                                            <br>
                                             <div class="details"><a href="{% url 'projectdetails' id=project.id %}"
                                                     class="btn btn-danger">View & Rate</a></div>
                                         </div>
