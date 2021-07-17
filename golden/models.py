@@ -10,6 +10,15 @@ class Profile(models.Model):
     profile_contact = models.CharField(max_length=60,blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile",primary_key=True)
 
+    def __str__(self):
+        return self.user.username
+
+    def save_profile(self):
+        self.save()
+
+    def delete_profile(self):
+        self.delete()
+
 class Project(models.Model):
     project_title = models.CharField(max_length=60,blank=True)
     project_image = CloudinaryField('image')
@@ -17,6 +26,15 @@ class Project(models.Model):
     project_link = models.URLField(blank=True)
     user = models.ForeignKey(User, null=True)
     profile = models.ForeignKey(Profile,null=True,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
+    def save_project(self):
+        self.save()
+
+    def delete_project(self):
+        self.delete()
 
 class Reviews(models.Model):
     REVIEW_CHOICES = (
@@ -37,6 +55,15 @@ class Reviews(models.Model):
     average =  models.DecimalField(default=1,blank=False,decimal_places=2,max_digits=100)
     project = models.ForeignKey(Project,null=True,on_delete=models.CASCADE)
     user = models.ForeignKey(User,null=True,blank=True)
+
+    def __str__(self):
+        return self.user
+
+    def save_review(self):
+        self.save()
+
+    def delete_review(self):
+        self.delete()
 
 
 
