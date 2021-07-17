@@ -1,4 +1,4 @@
-from golden.models import Project
+from golden.models import Profile, Project, Reviews
 from golden.forms import ProjectForm, SignupForm, UserProfileForm
 from django.shortcuts import render
 from django.contrib.auth import login, authenticate
@@ -10,7 +10,8 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='/accounts/login/')
 def index(request):
     projects = Project.objects.all()
-    return render(request,'index.html', {'projects':projects})
+    profile = Profile.objects.all()
+    return render(request,'index.html', {'projects':projects,'profile':profile})
 
 def signup(request):
     if request.method == 'POST':
@@ -52,5 +53,9 @@ def project(request):
 			form = ProjectForm()
 	return render(request, 'project.html',{"form":form})
 
-
+@login_required(login_url='/accounts/login')
+def project_view(request,id):
+    project = Project.objects.get(id = id)
+    reviews = Reviews.objects.all()
+    return render(request, 'project_view.html',{"reviews":reviews,"project":project})
 
