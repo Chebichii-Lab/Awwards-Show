@@ -28,7 +28,7 @@ class Project(models.Model):
     profile = models.ForeignKey(Profile,null=True,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.title
+        return self.project_title
 
     def save_project(self):
         self.save()
