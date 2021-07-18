@@ -1,4 +1,4 @@
-from golden.models import Profile, Project
+from golden.models import Profile, Project, Reviews
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -20,3 +20,8 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         exclude = ['user','profile']
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Reviews
+        exclude = ['user','project','average']
