@@ -86,3 +86,17 @@ def review_project(request,project_id):
     else:
         form = ReviewForm()
     return render(request, 'reviews.html', {"user":current_user,"project":proj,"form":form})
+
+def search_project(request): 
+    if 'project' in request.GET and request.GET['project']:
+        name = request.GET.get("project")
+        searchResults = Project.search_by_project_title(name)
+        message = f'name'
+        params = {
+            'results': searchResults,
+            'message': message
+        }
+        return render(request, 'search.html', params)
+    else:
+        message = "You haven't searched for any project"
+    return render(request, 'search.html', {'message': message})
