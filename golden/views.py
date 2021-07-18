@@ -1,13 +1,15 @@
+from django.http.response import HttpResponseRedirect
 from golden.models import Profile, Project, Reviews
-from golden.forms import ProjectForm, SignupForm, UserProfileForm
-from django.shortcuts import render
+from golden.forms import ProjectForm, ReviewForm, SignupForm, UserProfileForm
+from django.shortcuts import get_object_or_404, render
 from django.contrib.auth import login, authenticate
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 
 # Create your views here.
 
-@login_required(login_url='/accounts/login/')
+
 def index(request):
     projects = Project.objects.all()
     profile = Profile.objects.all()
@@ -59,3 +61,26 @@ def project_view(request,id):
     reviews = Reviews.objects.all()
     return render(request, 'project_view.html',{"reviews":reviews,"project":project})
 
+@login_required(login_url='/accounts/login/')
+def review_rate(request,project_id):
+    rate_proj = Project.project_by_id(id=project_id)
+    project = get_object_or_404(Project, pk=project_id)
+    current_user = request.user
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            design = form.cleaned_data['design']
+            usability = form.cleaned_data['usability']
+            content = form.cleaned_data['content']
+            review = Reviews()
+            review.project = project
+            review.user = current_user
+            review.design = design
+            review.usability = usability
+            review.content = content
+            review.average = (review.design + review.usability + review.content)/3
+            review.save()
+            return HttpResponseRedirect(reverse('projectdetails', args=(project.id,)))
+    else:
+        form = ReviewForm()
+    return render(request, 'review_rate.html', {"user":current_user,"rate_proj":rate_proj,"form":form})
