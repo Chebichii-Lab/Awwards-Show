@@ -36,6 +36,11 @@ class Project(models.Model):
     def delete_project(self):
         self.delete()
 
+    @classmethod
+    def project_by_id(cls,id):
+        project = Project.objects.filter(id =id)
+        return project
+
 class Reviews(models.Model):
     REVIEW_CHOICES = (
         (1, '1'),

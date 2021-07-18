@@ -13,7 +13,8 @@ from django.core.urlresolvers import reverse
 def index(request):
     projects = Project.objects.all()
     profile = Profile.objects.all()
-    return render(request,'index.html', {'projects':projects,'profile':profile})
+    review = Reviews.objects.all()
+    return render(request,'index.html', {'projects':projects,'profile':profile,'review':review})
 
 def signup(request):
     if request.method == 'POST':
@@ -62,13 +63,14 @@ def project_view(request,id):
     return render(request, 'project_view.html',{"reviews":reviews,"project":project})
 
 @login_required(login_url='/accounts/login/')
-def review_rate(request,project_id):
-    rate_proj = Project.project_by_id(id=project_id)
+def review_project(request,project_id):
+    proj = Project.project_by_id(id=project_id)
     project = get_object_or_404(Project, pk=project_id)
     current_user = request.user
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
+
             design = form.cleaned_data['design']
             usability = form.cleaned_data['usability']
             content = form.cleaned_data['content']
@@ -83,4 +85,4 @@ def review_rate(request,project_id):
             return HttpResponseRedirect(reverse('projectdetails', args=(project.id,)))
     else:
         form = ReviewForm()
-    return render(request, 'review_rate.html', {"user":current_user,"rate_proj":rate_proj,"form":form})
+    return render(request, 'reviews.html', {"user":current_user,"project":proj,"form":form})
