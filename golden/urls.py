@@ -18,3 +18,6 @@ urlpatterns=[
     url('api/projects',views.ProjectList.as_view(),name='projectsEndpoint'),
     url('api/profiles',views.ProfileList.as_view(),name='profilesEndpoint'),
 ]
+
+if settings.DEBUG:
+    urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
