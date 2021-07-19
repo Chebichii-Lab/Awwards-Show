@@ -55,7 +55,7 @@ Then once you are done, open your browser with the local host; 127.0.0.1:8000
 6. Postgresql
 
 # Live Link
-[View Live Site.](https://instagram2.0.herokuapp.com/)
+[View Live Site.](https://golden254.herokuapp.com/)
 
 ## License
 Golden Awwards is under the [MIT](LICENSE) license.
