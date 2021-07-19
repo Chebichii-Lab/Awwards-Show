@@ -1,8 +1,11 @@
 {%extends 'base.html'%}
 {% block content %}
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
 <div class="container">
-    <div class="row" style="margin-top:50px;">
+    <div class="row" style="margin-top:40px;">
         <div class="col-md-1"></div>
         <div class="col-sm-12 col-md-5 col-lg-4">
             <div class="card" style="height:340px;width:150%;margin-bottom:10px;">
@@ -22,18 +25,18 @@
         <div class="col-md-5">
             <div class="card" style="height:340px;margin-bottom:10px;">
                 <div class="card-body">
-                    <p style="font-size: 20px;"> <b>TITLE : </b> {{project.project_title}} </p>
+                    <p style="font-size: 20px; font-family: 'Special Elite', cursive;"> <b>TITLE : </b> {{project.project_title}} </p>
                     <p>
                         {% autoescape off %}
-                        <b style="font-size: 20px;">DESCRIPTION : </b> {{project.project_description}}
+                        <b style="font-size: 20px; font-family: 'Special Elite', cursive;">DESCRIPTION : </b> {{project.project_description}}
                         {% endautoescape %}
                     </p>
                     <br>
                     <a href="{% url 'review' project_id=project.id%}" class="btn btn-primary btn-lg"
-                        style="margin-top:4px;">Rate Project</a>
+                        style="margin-top:4px; font-family: 'Special Elite', cursive;">Rate Project</a>
                     <br>
                     <br>
-                    <a href="{{project.project_link}}" class="btn btn-primary btn-lg" target="_blank">Visit Link</a>
+                    <a href="{{project.project_link}}" class="btn btn-primary btn-lg" target="_blank" style="font-family: 'Special Elite', cursive;">Visit Link</a>
                     <br>
                 </div>
                 <div class="card-body">
@@ -43,43 +46,46 @@
             </div>
         </div>
     </div>
-    <div class="row" style="padding-left: 185px;">
+    <div class="row">
         {% if reviews %}
         <div class="col-md-2">
-            <p style="font-size: 20px; font-weight: bold; text-align: center;">DESIGN</p>
+            <p style="font-size: 20px; font-weight: bold; text-align: center; padding-left:400px; font-family: 'Special Elite', cursive;">DESIGN</p>
         </div>
         <div class="col-md-2">
-            <p style="font-size: 20px; font-weight: bold; text-align: center;">USABILITY</p>
+            <p style="font-size: 20px; font-weight: bold; text-align: center; padding-left: 370px; font-family: 'Special Elite', cursive;">USABILITY</p>
         </div>
         <div class="col-md-2">
-            <p style="font-size: 20px; font-weight: bold; text-align: center;">CONTENT</p>
+            <p style="font-size: 20px; font-weight: bold; text-align: center; padding-left: 370px; font-family: 'Special Elite', cursive;">CONTENT</p>
             {%else%}
-            <h3 style="padding-left:400px;">This project has no ratings</h3>
+            <h3 style="padding-left:400px; font-family: 'Special Elite', cursive;">This project has no ratings</h3>
             {%endif%}
         </div>
     </div>
-    <br>
     <div class="container">
         {% for review in reviews %}
         <div class="row">
             {% if project.id == review.project.id %}
-            <div class="col-md-2">
+            <div class="col-md-2" style="font-family: 'Special Elite', cursive;">
                 Rating by : <b> {{review.user.username}}</b></div>
+            <div class="col-md-2"></div>
             <div class="col-md-2">
-                <button type="button" class="btn btn-danger btn-lg">{{review.design}}</button>
+                <button type="button" class="btn btn-primary btn-lg">{{review.design}}</button>
             </div>
             <div class="col-md-2">
-                <button type="button" class="btn btn-warning btn-lg">{{review.usability}}</button>
+                <button type="button" class="btn btn-primary btn-lg">
+                    {{review.usability}}
+                </button>
             </div>
             <div class="col-md-2">
-                <button type="button" class="btn btn-success btn-lg">{{review.content}}</button>
+                <button type="button" class="btn btn-primary btn-lg">{{review.content}}</button>
             </div>
+            <br>
             <div class="col-md-2">
                 <button type="button" class="btn btn-secondary btn-lg">{{review.average}}</button>
             </div>
+            {%endif%}
         </div>
+        {% endfor  %}
+        {% endblock %}
     </div>
-    {%endif%}
 </div>
-{% endfor  %}
-{% endblock %}
