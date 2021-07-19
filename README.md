@@ -39,6 +39,12 @@ and run the following commands;
 
 Then once you are done, open your browser with the local host; 127.0.0.1:8000
 
+### API Endpoints
+
+    * [Projects Endpoint](https://golden254.herokuapp.com/api/projects)
+    * [Profiles Endpoint](https://golden254.herokuapp.com/api/profiles)
+
+
 ## Dependencies
 1. python3.8 
 2. Django 3.2.5 
