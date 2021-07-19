@@ -1,36 +1,33 @@
 {%extends 'base.html'%}
-{% load static %}
 {% load bootstrap3 %}
+{% load static %}
+
 {% block content %}
 
 <!DOCTYPE html>
 <html>
 
-
 <title>New Project</title>
 {{form.media}}
-
 {% block styles %} {% bootstrap_css %}
 
-<link rel="stylesheet" href="{% static 'css/styles.css' %}">
 {% endblock %}
 
-
-
-<div class="container" style="margin-top:30px;">
-    <h2 style="text-align:center;">Post A Project</h2>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+<div class="container" style="margin-top:20px;" id="background1">
+    <h2 style="text-align:center; font-family: 'Special Elite', cursive;">Post A Project</h2>
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-
             <form action="{%url 'add_project'%}" method="POST" enctype="multipart/form-data">
                 {%csrf_token%}
 
                 {% bootstrap_form form %}
-                <input type="submit" class="btn btn-danger btn-block" value="Post">
+                <input type="submit" class="btn btn-primary btn-block" value="Post">
             </form>
         </div>
-        <!-- <div class="col-md-3"></div> -->
     </div>
 </div>
 
