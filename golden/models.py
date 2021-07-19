@@ -24,7 +24,7 @@ class Project(models.Model):
     project_image = CloudinaryField('image')
     project_description = models.TextField()
     project_link = models.URLField(blank=True)
-    user = models.ForeignKey(User, null=True)
+    user = models.ForeignKey(User, null=True,on_delete=models.CASCADE)
     profile = models.ForeignKey(Profile,null=True,on_delete=models.CASCADE)
 
     def __str__(self):
@@ -64,7 +64,7 @@ class Reviews(models.Model):
     content = models.IntegerField(choices=REVIEW_CHOICES,default=0,blank=False)
     average =  models.DecimalField(default=1,blank=False,decimal_places=2,max_digits=100)
     project = models.ForeignKey(Project,null=True,on_delete=models.CASCADE)
-    user = models.ForeignKey(User,null=True,blank=True)
+    user = models.ForeignKey(User,null=True,blank=True,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user
